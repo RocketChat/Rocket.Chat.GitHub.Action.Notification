@@ -1,0 +1,41 @@
+name: 'Rocket.Chat Notification'
+description: 'Rocket.Chat Notification for GitHub Actions'
+author: 'Rocket.Chat'
+inputs:
+  type:
+    description: 'job status (success, failure or cancelled)'
+    required: true
+  job_name:
+    description: 'job name of workflow (format: markdown)'
+    required: true
+  mention:
+    description: 'rocket.chat mention'
+    required: false
+  mention_if:
+    description: 'the condition for mention'
+    required: false
+  username:
+    description: 'rocket.chat username'
+    required: false
+  icon_emoji:
+    description: 'rocket.chat icon emoji'
+    required: false
+  channel:
+    description: 'rocket.chat channel'
+    required: false
+  url:
+    description: 'rocket.chat incoming webhook url'
+    required: false
+  commit:
+    description: 'whether include commit data or not (true or false)'
+    required: false
+    default: 'false'
+  token:
+    description: 'need to get commit data'
+    required: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'bell'
+  color: 'green'

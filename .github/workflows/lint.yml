@@ -1,0 +1,31 @@
+name: TS Lint Check
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - src/*
+  pull_request:
+    branches:
+      - master
+    paths:
+      - src/*
+
+jobs:
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Setup TS
+        run: npm install tslint typescript -g
+
+      - name: Lint check with tslint
+        run: tslint './src/*.ts'
