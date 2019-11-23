@@ -1,21 +1,11 @@
 name: TS Lint Check
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - src/*
-  pull_request:
-    branches:
-      - master
-    paths:
-      - src/*
+on: push
 
 jobs:
   lint:
     name: Lint Check
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
 
