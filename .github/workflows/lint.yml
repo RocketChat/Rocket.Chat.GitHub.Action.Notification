@@ -1,9 +1,6 @@
 name: TS Lint Check
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   lint:

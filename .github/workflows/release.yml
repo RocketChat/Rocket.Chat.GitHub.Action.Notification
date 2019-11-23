@@ -3,7 +3,7 @@ name: Prepare for release
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   release:
