@@ -5,7 +5,7 @@
 ![GitHub](https://img.shields.io/github/license/RocketChat/Rocket.Chat.GitHub.Action.Notification?color=brightgreen)
 
 This is Rocket.Chat Notification for GitHub Actions.<br>
-Generated from [actions/javascript-template](https://github.com/actions/javascript-template).
+Forked from [homoluctus/slatify](https://github.com/homoluctus/slatify). Thanks a lot for your awesome work!
 
 # Feature
 - Notify the result of GitHub Actions
