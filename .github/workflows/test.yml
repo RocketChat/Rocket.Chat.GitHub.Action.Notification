@@ -42,6 +42,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Forced failure
+        continue-on-error: true
         run: exit 1
 
       - name: Rocket.Chat Notification
