@@ -5454,7 +5454,7 @@ function run() {
                 channel: core.getInput('channel'),
                 icon_emoji: core.getInput('icon_emoji')
             };
-            const bodyFlag = core.getInput('body') === 'true';
+            const bodyFlag = core.getInput('body') === 'false';
             const commitFlag = core.getInput('commit') === 'true';
             const token = core.getInput('token');
             if (mention && !utils_1.isValidCondition(mentionCondition)) {
