@@ -31,6 +31,7 @@ You can customize the following parameters:
 |icon_emoji|optional|Use Rocket.Chat Incoming Webhook configuration|Rocket.Chat icon|
 |username|optional|Use Rocket.Chat Incoming Webhook configuration|Rocket.Chat username|
 |channel|optional|Use Rocket.Chat Incoming Webhook configuration|Rocket.Chat channel name|
+|body|optional|false|If true, Rocket.Chat notification includes commit data (ref, event name, workflow, repository).|
 |commit|optional|false|If true, Rocket.Chat notification includes the latest commit message and author.|
 |token|case by case|N/A|This token is used to get commit data.<br>If commit parameter is true, this parameter is required.<br>${{ secrets.GITHUB_TOKEN }} is recommended.|
 
