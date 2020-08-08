@@ -29,7 +29,7 @@ inputs:
   body:
     description: 'whether include data (ref, event name, workflow, repository) or not (true or false)'
     required: false
-    default: 'false'
+    default: 'true'
   commit:
     description: 'whether include commit data or not (true or false)'
     required: false

@@ -15,7 +15,7 @@ async function run() {
 			channel: core.getInput('channel'),
 			icon_emoji: core.getInput('icon_emoji')
 		};
-		const bodyFlag: boolean = core.getInput('body') === 'true';
+		const bodyFlag: boolean = core.getInput('body') === 'false';
 		const commitFlag: boolean = core.getInput('commit') === 'true';
 		const token: string = core.getInput('token');
 
