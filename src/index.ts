@@ -15,6 +15,7 @@ async function run() {
 			channel: core.getInput('channel'),
 			icon_emoji: core.getInput('icon_emoji')
 		};
+		const bodyFlag: boolean = core.getInput('body') === 'true';
 		const commitFlag: boolean = core.getInput('commit') === 'true';
 		const token: string = core.getInput('token');
 
@@ -36,7 +37,7 @@ async function run() {
 		}
 
 		const rocketchat = new RocketChat();
-		const payload = await rocketchat.generatePayload(jobName, status, mention, mentionCondition, commitFlag, token);
+		const payload = await rocketchat.generatePayload(jobName, status, mention, mentionCondition, bodyFlag, commitFlag, token);
 
 		await rocketchat.notify(url, options, payload);
 		console.info('Sent message to Rocket.Chat');

@@ -1,5 +1,5 @@
 import * as github from '@actions/github';
-import Octokit from '@octokit/rest';
+import {Octokit} from '@octokit/rest';
 import {Context} from '@actions/github/lib/context';
 import axios from 'axios';
 
@@ -86,13 +86,13 @@ class Helper {
 		const {owner, repo} = this.context.repo;
 		const head_ref: string = process.env.GITHUB_HEAD_REF as string;
 		const ref: string = this.isPullRequest ? head_ref.replace(/refs\/heads\//, '') : this.context.sha;
-		const client: github.GitHub = new github.GitHub(token);
-		const {data: commit}: Octokit.Response<Octokit.ReposGetCommitResponse> = await client.repos.getCommit({owner, repo, ref});
+		const client = new Octokit({auth: token});
+		const {data: commit} = await client.repos.getCommit({owner, repo, ref});
 		const authorName: string = commit.author.login;
 		const authorUrl: string = commit.author.html_url;
 		const commitMsg: string = commit.commit.message;
 		const commitUrl: string = commit.html_url;
-		const fields = [
+		return [
 			{
 				short: true,
 				title: 'commit',
@@ -104,7 +104,6 @@ class Helper {
 				value: `[${authorName}](${authorUrl})`
 			}
 		];
-		return fields;
 	}
 }
 
@@ -113,13 +112,13 @@ export class RocketChat {
 		return condition === 'always' || condition === status;
 	}
 
-	public async generatePayload(jobName: string, status: string, mention: string, mentionCondition: string, commitFlag: boolean, token?: string): Promise<any> {
+	public async generatePayload(jobName: string, status: string, mention: string, mentionCondition: string, bodyFlag: boolean, commitFlag: boolean, token?: string): Promise<any> {
 		const helper = new Helper();
 		const notificationType: Accessory = helper[status];
 		const tmpText: string = `${jobName} ${notificationType.result}`;
 		const text = mention && this.isMention(mentionCondition, status) ? `@${mention} ${tmpText}` : tmpText;
 
-		const fields = helper.baseFields;
+		const fields = bodyFlag ? helper.baseFields : [];
 
 		if (commitFlag && token) {
 			const commitFields = await helper.getCommitFields(token);
