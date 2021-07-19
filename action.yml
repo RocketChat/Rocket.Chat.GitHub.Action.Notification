@@ -33,6 +33,9 @@ inputs:
   token:
     description: 'need to get commit data'
     required: false
+  github_url:
+    description: 'needed for GitHub Enterprise'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

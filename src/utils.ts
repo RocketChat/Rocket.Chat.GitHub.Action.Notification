@@ -1,5 +1,5 @@
 const jobStatuses: string[] = ['success', 'failure', 'cancelled'];
-const metionConditions: string[] = [...jobStatuses, 'always'];
+const mentionConditions: string[] = [...jobStatuses, 'always'];
 
 function isValid(target: string, validList: string[]): boolean {
 	return validList.includes(target);
@@ -18,5 +18,5 @@ export function validateStatus(jobStatus: string): string {
 }
 
 export function isValidCondition(condition: string): boolean {
-	return isValid(condition, metionConditions);
+	return isValid(condition, mentionConditions);
 }

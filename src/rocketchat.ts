@@ -1,7 +1,8 @@
 import * as github from '@actions/github';
-import Octokit from '@octokit/rest';
+import * as core from '@actions/core';
 import {Context} from '@actions/github/lib/context';
 import axios from 'axios';
+import {OctokitOptions} from '@octokit/core/dist-types/types';
 
 export interface IncomingWebhookDefaultArguments {
 	username: string;
@@ -47,7 +48,9 @@ class Helper {
 		const {sha, eventName, workflow, ref} = this.context;
 		const {owner, repo} = this.context.repo;
 		const {number} = this.context.issue;
-		const repoUrl: string = `https://github.com/${owner}/${repo}`;
+
+		const githubUrl: string = process.env.GITHUB_URL || core.getInput('github_url') || 'https://github.com';
+		const repoUrl: string = `${githubUrl}/${owner}/${repo}`;
 		let actionUrl: string = repoUrl;
 		let eventUrl: string = eventName;
 
@@ -82,14 +85,29 @@ class Helper {
 		];
 	}
 
-	public async getCommitFields(token: string): Promise<any[]> {
+	public async getCommitFields(token: string, githubUrl: string): Promise<any[]> {
 		const {owner, repo} = this.context.repo;
 		const head_ref: string = process.env.GITHUB_HEAD_REF as string;
 		const ref: string = this.isPullRequest ? head_ref.replace(/refs\/heads\//, '') : this.context.sha;
-		const client: github.GitHub = new github.GitHub(token);
-		const {data: commit}: Octokit.Response<Octokit.ReposGetCommitResponse> = await client.repos.getCommit({owner, repo, ref});
-		const authorName: string = commit.author.login;
-		const authorUrl: string = commit.author.html_url;
+
+		let options: OctokitOptions = {
+			log: {
+				debug: console.debug,
+				info: console.info,
+				warn: console.warn,
+				error: console.error
+			}
+		};
+
+		if (githubUrl) {
+			options.baseUrl = `${githubUrl}/api/v3`;
+		}
+
+		const client = github.getOctokit(token, options);
+		const {data: commit} = await client.rest.repos.getCommit({owner, repo, ref});
+
+		const authorName: string = commit.commit.author?.name || commit.author?.login || 'Unknown';
+		const authorUrl: string = commit.author?.html_url || '';
 		const commitMsg: string = commit.commit.message;
 		const commitUrl: string = commit.html_url;
 		const fields = [
@@ -101,7 +119,7 @@ class Helper {
 			{
 				short: true,
 				title: 'author',
-				value: `[${authorName}](${authorUrl})`
+				value: `[${authorName}]${authorUrl ? `(${authorUrl})` : ''}`
 			}
 		];
 		return fields;
@@ -113,7 +131,7 @@ export class RocketChat {
 		return condition === 'always' || condition === status;
 	}
 
-	public async generatePayload(jobName: string, status: string, mention: string, mentionCondition: string, commitFlag: boolean, token?: string): Promise<any> {
+	public async generatePayload(jobName: string, status: string, mention: string, mentionCondition: string, commitFlag: boolean, githubUrl: string, token?: string): Promise<any> {
 		const helper = new Helper();
 		const notificationType: Accessory = helper[status];
 		const tmpText: string = `${jobName} ${notificationType.result}`;
@@ -122,7 +140,7 @@ export class RocketChat {
 		const fields = helper.baseFields;
 
 		if (commitFlag && token) {
-			const commitFields = await helper.getCommitFields(token);
+			const commitFields = await helper.getCommitFields(token, githubUrl);
 			Array.prototype.push.apply(fields, commitFields);
 		}
 
