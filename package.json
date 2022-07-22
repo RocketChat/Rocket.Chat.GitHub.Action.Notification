@@ -1,6 +1,6 @@
 {
   "name": "rocketchat-github-enterprise-action-notification",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "Rocket.Chat Notification for GitHub Enterprise Actions",
   "main": "lib/main.js",
   "scripts": {
