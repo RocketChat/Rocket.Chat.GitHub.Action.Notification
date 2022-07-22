@@ -1,4 +1,4 @@
-name: 'Rocket.Chat Notification'
+name: 'Rocket.Chat GitHub Enterprise Notification'
 description: 'Rocket.Chat Notification for GitHub Actions'
 author: 'Rocket.Chat'
 inputs:
