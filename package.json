@@ -1,7 +1,7 @@
 {
-  "name": "rocketchat-github-action-notification",
-  "version": "1.0.1",
-  "description": "Rocket.Chat Notification for GitHub Actions",
+  "name": "rocketchat-github-enterprise-action-notification",
+  "version": "1.0.0",
+  "description": "Rocket.Chat Notification for GitHub Enterprise Actions",
   "main": "lib/main.js",
   "scripts": {
     "build": "ncc build src/index.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RocketChat/Rocket.Chat.GitHub.Action.Notification.git"
+    "url": "git+https://github.com/wreiske/Rocket.Chat.GitHub.Action.Notification.git"
   },
   "keywords": [
     "actions",
@@ -27,9 +27,9 @@
   "author": "Rocket.Chat",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RocketChat/Rocket.Chat.GitHub.Action.Notification/issues"
+    "url": "https://github.com/wreiske/Rocket.Chat.GitHub.Action.Notification/issues"
   },
-  "homepage": "https://github.com/RocketChat/Rocket.Chat.GitHub.Action.Notification#readme",
+  "homepage": "https://github.com/wreiske/Rocket.Chat.GitHub.Action.Notification#readme",
   "dependencies": {
     "@actions/core": "^1.4.0",
     "@actions/exec": "^1.1.0",
