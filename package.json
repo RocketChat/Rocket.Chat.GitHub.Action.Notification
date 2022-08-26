@@ -1,6 +1,6 @@
 {
   "name": "rocketchat-github-enterprise-action-notification",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Rocket.Chat Notification for GitHub Enterprise Actions",
   "main": "lib/main.js",
   "scripts": {
@@ -31,22 +31,22 @@
   },
   "homepage": "https://github.com/wreiske/Rocket.Chat.GitHub.Action.Notification#readme",
   "dependencies": {
-    "@actions/core": "^1.4.0",
-    "@actions/exec": "^1.1.0",
-    "@actions/github": "^5.0.0",
-    "@actions/io": "^1.1.1",
-    "@actions/tool-cache": "^1.7.1",
-    "axios": "^0.21.1"
+    "@actions/core": "^1.9.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.0.3",
+    "@actions/io": "^1.1.2",
+    "@actions/tool-cache": "^2.0.1",
+    "axios": "^0.27.2"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.4.1",
     "@types/node": "^16.3.3",
     "@vercel/ncc": "^0.29.0",
     "husky": "^7.0.1",
-    "jest": "^27.0.6",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.5",
     "jest-circus": "^27.0.6",
     "prettier": "^2.3.2",
-    "ts-jest": "^27.0.3",
     "typescript": "^4.3.5"
   }
 }
