@@ -1,4 +1,4 @@
-name: 'Rocket.Chat Notification'
+name: 'Rocket.Chat GitHub Enterprise Notification'
 description: 'Rocket.Chat Notification for GitHub Actions'
 author: 'Rocket.Chat'
 inputs:
@@ -32,6 +32,9 @@ inputs:
     default: 'false'
   token:
     description: 'need to get commit data'
+    required: false
+  github_url:
+    description: 'needed for GitHub Enterprise'
     required: false
 runs:
   using: 'node12'

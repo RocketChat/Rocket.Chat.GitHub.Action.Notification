@@ -8,6 +8,7 @@ async function run() {
 		const status: string = validateStatus(core.getInput('type', {required: true}).toLowerCase());
 		const jobName: string = core.getInput('job_name', {required: true});
 		const url: string = process.env.ROCKETCHAT_WEBHOOK || core.getInput('url');
+		const githubUrl: string = process.env.GITHUB_URL || core.getInput('github_url');
 		let mention: string = core.getInput('mention');
 		let mentionCondition: string = core.getInput('mention_if').toLowerCase();
 		const options: IncomingWebhookDefaultArguments = {
@@ -22,7 +23,7 @@ async function run() {
 			mention = '';
 			mentionCondition = '';
 			console.warn(`
-				Ignore Rocket.Chat message metion:
+				Ignore Rocket.Chat message mention:
 				mention_if: ${mentionCondition} is invalid
 			`);
 		}
@@ -36,8 +37,7 @@ async function run() {
 		}
 
 		const rocketchat = new RocketChat();
-		const payload = await rocketchat.generatePayload(jobName, status, mention, mentionCondition, commitFlag, token);
-
+		const payload = await rocketchat.generatePayload(jobName, status, mention, mentionCondition, commitFlag, githubUrl, token);
 		await rocketchat.notify(url, options, payload);
 		console.info('Sent message to Rocket.Chat');
 	} catch (err) {
