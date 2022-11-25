@@ -1,5 +1,9 @@
 # Rocket.Chat.GitHub.Action.Notification
 
+Forked from ![RocketChat/Rocket.Chat.GitHub.Action.Notification](https://github.com/RocketChat/Rocket.Chat.GitHub.Action.Notification) 
+to solve Github Actions warning about node12 deprecation
+
+
 ![](https://github.com/RocketChat/Rocket.Chat.GitHub.Action.Notification/workflows/TS%20Lint%20Check/badge.svg)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/RocketChat/Rocket.Chat.GitHub.Action.Notification?color=brightgreen)
 ![GitHub](https://img.shields.io/github/license/RocketChat/Rocket.Chat.GitHub.Action.Notification?color=brightgreen)
@@ -40,12 +44,12 @@ Please refer `action.yml` for more details.
 
 ```..github/workflows/example1.yml
 - name: Rocket.Chat Notification
-  uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
+  uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@v1
   if: always()
   with:
     type: ${{ job.status }}
     job_name: '*Lint Check*'
-    mention: 'here'
+    mention: 'here' #there is an open issue about this config ![issue](https://github.com/RocketChat/Rocket.Chat.GitHub.Action.Notification/issues/2) 
     mention_if: 'failure'
     channel: '#random'
     url: ${{ secrets.ROCKETCHAT_WEBHOOK }}
@@ -55,12 +59,12 @@ Please refer `action.yml` for more details.
 
 ```..github/workflows/example2.yml
 - name: Rocket.Chat Notification
-  uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
+  uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@v1
   if: always()
   with:
     type: ${{ job.status }}
     job_name: '*Lint Check*'
-    mention: 'here'
+    mention: 'here' #there is an open issue about this config ![issue](https://github.com/RocketChat/Rocket.Chat.GitHub.Action.Notification/issues/2) 
     mention_if: 'failure'
     channel: '#random'
     url: ${{ secrets.ROCKETCHAT_WEBHOOK }}
